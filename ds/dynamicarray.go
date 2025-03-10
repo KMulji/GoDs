@@ -1,6 +1,7 @@
 package ds
 
 import (
+	"errors"
 	"fmt"
 
 	"golang.org/x/exp/constraints"
@@ -23,16 +24,18 @@ func (da *DynamicArray[T]) Append(val T) {
 	da.a[da.length] = val
 	da.length++
 }
-func (da *DynamicArray[T]) Pop() {
+func (da *DynamicArray[T]) Pop() (T, error) {
 	var zeroValue T
 	if da.length == 0 {
-		return
+		return zeroValue, errors.New("array is empty")
 	}
 	if da.length == da.size/2 {
 		da.shrink()
 	}
+	temp := da.a[da.length-1]
 	da.a[da.length-1] = zeroValue
 	da.length--
+	return temp, nil
 
 }
 
@@ -51,9 +54,10 @@ func (da *DynamicArray[T]) Insert(index int, val T) {
 
 }
 
-func (da *DynamicArray[T]) Delete(index int) {
+func (da *DynamicArray[T]) Delete(index int) (T, error) {
+	var zeroValue T
 	if da.length == 0 {
-		return
+		return zeroValue, errors.New("array is empty")
 	}
 	if da.length == da.size/2 {
 		da.shrink()
@@ -64,9 +68,10 @@ func (da *DynamicArray[T]) Delete(index int) {
 		da.a[i] = da.a[i+1]
 		i++
 	}
+	temp := da.a[index]
 	da.length--
-	var zeroValue T
 	da.a[da.length] = zeroValue
+	return temp, nil
 
 }
 func (da *DynamicArray[T]) BinSearch(key T) {

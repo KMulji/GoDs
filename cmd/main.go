@@ -15,6 +15,7 @@ func main() {
 	a.Pop()
 	a.Pop()
 	a.Pop()
+	a.Pop()
 	a.Append(1)
 	a.Append(2)
 	a.Append(3)
