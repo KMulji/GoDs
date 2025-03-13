@@ -1,5 +1,7 @@
 package ds
 
+import "fmt"
+
 func CountDigits(x int) int {
 	var res int
 
@@ -89,4 +91,105 @@ func CheckPrime(x int) bool {
 		}
 	}
 	return true
+}
+
+func PrimeFactors(x int) {
+	if x <= 1 {
+		return
+	}
+
+	for x%2 == 0 {
+		fmt.Printf("%d ", 2)
+		x = x / 2
+	}
+
+	for x%3 == 0 {
+		fmt.Printf("%d ", 3)
+		x = x / 3
+	}
+	for i := 5; i <= x*x; i = i + 6 {
+		for x%i == 0 {
+			fmt.Printf(" %d", i)
+			x = x / i
+		}
+
+		for x%(i+2) == 0 {
+			fmt.Printf(" %d", i+2)
+			x = x / (i + 2)
+		}
+
+	}
+	fmt.Printf("\n")
+	if x > 3 {
+		fmt.Printf(" %d", x)
+	}
+}
+
+func AllDivisors(x int) {
+
+	var i int = 1
+
+	for ; i*i <= x; i++ {
+		if x%i == 0 {
+			fmt.Printf("%d ", i)
+		}
+	}
+	for ; i >= 1; i-- {
+		if x%i == 0 {
+			fmt.Printf("%d ", x/i)
+		}
+	}
+	fmt.Printf("\n")
+}
+
+func Siev(x int) {
+	isPrime := make([]bool, x+1)
+
+	for i, _ := range isPrime {
+		isPrime[i] = true
+	}
+
+	for i := 2; i*i <= x; i++ {
+		if isPrime[i] {
+			for j := i * 2; j <= x; j = j + i {
+				isPrime[j] = false
+			}
+		}
+	}
+	for i := 2; i <= x; i++ {
+		if isPrime[i] {
+			fmt.Printf("%d ", i)
+		}
+	}
+	fmt.Printf("\n")
+
+}
+
+func Power(x int, n int) int {
+	if n == 0 {
+		return 1
+	}
+
+	var temp int = Power(x, n/2)
+	temp = temp * temp
+
+	if n%2 == 0 {
+		return temp
+	}
+	return temp * x
+}
+
+func IterPower(x int, n int) int {
+	var res int = 1
+	for n > 0 {
+		//bit is 1
+		if n%2 != 0 {
+			res = res * x
+
+		}
+		x = x * x
+		n = n / 2
+	}
+
+	return res
 }
