@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"local/ds"
 )
 
@@ -29,6 +30,6 @@ func main() {
 	// fmt.Println(a)
 	// a.BinSearch(1000)
 
-	ds.Siev(9)
+	fmt.Println(ds.CountSetBits(10))
 
 }
