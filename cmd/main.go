@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"local/ds"
-)
+import "fmt"
 
 func main() {
 	// var a *ds.DynamicArray[int] = ds.DynamicArrayInit[int](2)
@@ -29,7 +26,11 @@ func main() {
 
 	// fmt.Println(a)
 	// a.BinSearch(1000)
+	// a := []int{4, 4, 1, 1, 4, 8, 7, 7, 7, 8, 4}
+	// fmt.Println(ds.FindOdd([]int(a), len(a)))
 
-	fmt.Println(ds.CountSetBits(10))
+	//10100
+	a := 20
+	fmt.Printf("%d", (a & (a - 1)))
 
 }
